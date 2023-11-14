@@ -26,6 +26,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     //타임리브
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    //엑츄에이터
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     //devtools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
