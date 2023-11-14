@@ -11,12 +11,12 @@ import java.util.Map;
 
 @Controller
 public class ArticleController {
-
-
+    private Article lastArticle;
     @GetMapping("/article/write")
     String showWrite() {
         return "article/write"; // aritcle/write에 있는 폴더가 필요하다
     }
+
 
     @GetMapping("/article/doWrite")
     @ResponseBody
@@ -24,12 +24,18 @@ public class ArticleController {
             String title,
             String body
     ) {
+        lastArticle = new Article(1,title,body); // article <-함수 안에서 정의 된 변수는 지역변수이다
+
         Map<String, Object> rs = new HashMap<>();
         rs.put("msg","1번 게시물이 작성되었습니다");
-        Article article = new Article(1,title,body);
-        rs.put("data", article);
+        rs.put("data", lastArticle);
 
         return rs;
+    }
+    @GetMapping("/article/getLastArticle")
+    @ResponseBody
+    Article getLastArticle(){
+        return lastArticle;
     }
 
 }
