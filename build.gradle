@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+    runtimeOnly 'com.mysql:mysql-connector-j'
     // 스프링웹
     implementation 'org.springframework.boot:spring-boot-starter-web'
     //타임리브
