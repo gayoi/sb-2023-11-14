@@ -232,6 +232,15 @@ public class HomeController {
         return "calc21";
     }
 
+    int num = 0; // 인스턴스 변수 // calc 안에 있을때는 지역변수
+    @GetMapping("/calc22")
+    @ResponseBody
+    int showCalc22() {
+
+        num++;
+        return num;
+    }
+
 }
 
 @AllArgsConstructor // 모든 필드를 argumnet 로 받는다
