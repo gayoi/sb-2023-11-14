@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +30,8 @@ public class ArticleController {
     ) {
         Article article = new Article(articles.size()+1, title,   body); // article <-함수 안에서 정의 된 변수는 지역변수이다
 
-        Map<String, Object> rs = new HashMap<>();
+        Map<String, Object> rs = new LinkedHashMap<>(); // linkedhashMap은 내가 링크를 기억한다는 뜻
+        rs.put("resultCode","S-1"); // 결과과 성공 살패로 나눠지는데 실패한 이유를 1,2,3, 성공한 이유를 1,2,,3 으로 나눠서 적는다
         rs.put("msg","%d번 게시물이 작성되었습니다".formatted(article.getId()));
         rs.put("data", article);
 
