@@ -33,15 +33,16 @@ public class ArticleController {
         rs.put("resultCode","S-1"); // 결과과 성공 살패로 나눠지는데 실패한 이유를 1,2,3, 성공한 이유를 1,2,,3 으로 나눠서 적는다
         rs.put("msg","%d번 게시물이 작성되었습니다".formatted(article.getId()));
         rs.put("data", article);*/
-
-        RsData rs = new RsData(
+        // map으로 하면 너무 기니까 객체생성으로 한줄로 쓸수잏씅ㅁ
+        RsData<Article> rs = new RsData<Article>( //RsData<Article> 이 class 이다 -> 다른 데이터를 쓸때는 RsData<Person>을 사용하자
                 "S-1",
                 "%d번 게시물이 작성되었습니다".formatted(article.getId()),
                 article
         );
         String resultCode = rs.getResultCode(); // S-1 이 출력된다
         String msg = rs.getMsg(); // d번 게시물이 작성되었습니다
-        Article _article = (Article) rs.getData();
+        // Object를 하면 수동형변환을 해야한다 (Article) rs.getData();
+        Article _article =  rs.getData();
         return rs;
     }
     @GetMapping("/article/getLastArticle")
@@ -59,11 +60,10 @@ public class ArticleController {
 }
 @AllArgsConstructor
 @Getter
-class RsData { // 제너릭
+class RsData<T> { // 제너릭 문법 단 객체를 만들때 RsData<Article> = new RsData<>로 해야한다
     private String resultCode;
     private String msg;
-    // 바로 받고시픙 Object로 들어오면 다 형변환해서 나가야하는데 형변환하기 싫으면 Article로
-    private Article data; // 여기 뭐가 들어올지 모른다면 t를 사용해도 좋다 옛날에는 objet를 썻 object는 다 된다는 뜻 뭐든지 드러와도된다는 뜻
+    private T data;
 }
 
 @AllArgsConstructor // 모든 필드를 argument로 하는 ..?
