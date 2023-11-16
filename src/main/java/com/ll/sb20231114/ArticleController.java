@@ -39,7 +39,9 @@ public class ArticleController {
                 "%d번 게시물이 작성되었습니다".formatted(article.getId()),
                 article
         );
-
+        String resultCode = rs.getResultCode(); // S-1 이 출력된다
+        String msg = rs.getMsg(); // d번 게시물이 작성되었습니다
+        Article _article =  rs.getData(); // 바로 받고시픙
         return rs;
     }
     @GetMapping("/article/getLastArticle")
@@ -60,7 +62,8 @@ public class ArticleController {
 class RsData { // 제너릭
     private String resultCode;
     private String msg;
-    private Object data; // 여기 뭐가 들어올지 모른다면 t를 사용해도 좋다 옛날에는 objet를 썻 object는 다 된다는 뜻 뭐든지 드러와도된다는 뜻
+    // 바로 받고시픙 Object를 형변환해서 Article로 바꾼다
+    private Article data; // 여기 뭐가 들어올지 모른다면 t를 사용해도 좋다 옛날에는 objet를 썻 object는 다 된다는 뜻 뭐든지 드러와도된다는 뜻
 }
 
 @AllArgsConstructor // 모든 필드를 argument로 하는 ..?
